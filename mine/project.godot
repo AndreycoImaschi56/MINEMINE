@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MINE"
-run/main_scene="uid://cpw7yotoj1tgb"
+run/main_scene="uid://x17akri87jvh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://addons/icon.svg"
 

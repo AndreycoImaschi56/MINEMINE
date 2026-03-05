@@ -1,6 +1,6 @@
 [gd_scene load_steps=56 format=3 uid="uid://cpw7yotoj1tgb"]
 
-[ext_resource type="Script" uid="uid://dev7t4xxngt82" path="res://scene/player.gd" id="1_hjaqi"]
+[ext_resource type="Script" uid="uid://dev7t4xxngt82" path="res://script/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://dsl8q80fqigyb" path="res://assets/images/player/Player.png" id="1_xo3ru"]
 [ext_resource type="AudioStream" uid="uid://dafinsemqxid" path="res://assets/audio/universfield-swoosh-015-383769.mp3" id="3_fvtld"]
 
@@ -400,13 +400,13 @@ func _physics_process(delta: float) -> void:
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct4mp"]
-size = Vector2(13, 6)
+size = Vector2(12, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fvtld"]
 size = Vector2(15, 15)
 
 [node name="player" type="CharacterBody2D"]
-position = Vector2(153, 88)
+z_index = 5
 script = ExtResource("1_hjaqi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -416,7 +416,7 @@ flip_h = true
 script = SubResource("GDScript_fvtld")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 4)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_ct4mp")
 
 [node name="swingsword" type="AudioStreamPlayer2D" parent="."]
@@ -425,6 +425,7 @@ pitch_scale = 3.0
 
 [node name="hitbox" type="Area2D" parent="."]
 position = Vector2(7, -0.5)
+collision_mask = 2
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
@@ -432,3 +433,4 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_fvtld")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

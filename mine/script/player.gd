@@ -5,6 +5,7 @@ const SPEED = 100
 var last_direction: Vector2 = Vector2.RIGHT
 var is_attacking: bool = false
 var hitbox_offset: Vector2
+var strenght: int = 20
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var swingsword: AudioStreamPlayer2D = $swingsword
@@ -16,6 +17,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	
+	hitbox.monitoring = false
 	
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		attack()
@@ -65,6 +68,7 @@ func play_animation (prefix: String, dir : Vector2) -> void:
 
 func attack() -> void:
 	is_attacking = true
+	hitbox.monitoring = true
 	swingsword.play()
 	play_animation("attack", last_direction)
 
@@ -85,3 +89,8 @@ func update_hitbox_offset() -> void:
 			hitbox.position = Vector2 (y, -x)
 		Vector2.DOWN:
 			hitbox.position = Vector2 (y, x)
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if is_attacking and body.name.begins_with("slime"):
+		body.take_damage(strenght, position)
