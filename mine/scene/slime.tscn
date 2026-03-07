@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://c7vckloi7ghk0"]
+[gd_scene load_steps=28 format=3 uid="uid://c7vckloi7ghk0"]
 
 [ext_resource type="Script" uid="uid://g786hsgkpuiy" path="res://script/slime.gd" id="1_08lxr"]
 [ext_resource type="Texture2D" uid="uid://tyswwv476cgc" path="res://assets/images/enemies/Slime_Green.png" id="1_bwbrm"]
 [ext_resource type="AudioStream" uid="uid://dxa6076pxnc57" path="res://assets/audio/floraphonic-slime-splat-4-219250.mp3" id="3_p3a6y"]
+[ext_resource type="PackedScene" uid="uid://cs7o46vftrky1" path="res://scene/healthbar.tscn" id="4_wkhhu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_08lxr"]
 atlas = ExtResource("1_bwbrm")
@@ -175,10 +176,8 @@ script = ExtResource("1_08lxr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_arter")
-animation = &"idle"
+animation = &"die"
 autoplay = "idle"
-frame = 3
-frame_progress = 0.79778844
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bwbrm")
@@ -190,6 +189,9 @@ shape = SubResource("CircleShape2D_bwbrm")
 
 [node name="hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_p3a6y")
+
+[node name="Healthbar" parent="." instance=ExtResource("4_wkhhu")]
+position = Vector2(-9, -12)
 
 [connection signal="body_entered" from="sight" to="." method="_on_sight_body_entered"]
 [connection signal="body_exited" from="sight" to="." method="_on_sight_body_exited"]

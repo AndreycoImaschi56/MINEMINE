@@ -10,6 +10,7 @@ var is_alive: bool = true
 
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var healthbar: Node2D = $Healthbar
 
 
 
@@ -32,14 +33,14 @@ func _on_sight_body_entered(body: Node2D) -> void:
 
 
 func _on_sight_body_exited(body: Node2D) -> void:
-	if body.name == ("player"):
+	if body.name == "player" and is_alive:
 		target = null
 		animated_sprite.play("idle")
 
 
 func take_damage(damage: int, attacker_position: Vector2) -> void:
 	healt -= damage
-	print(healt)
+	healthbar.update_health(healt)
 	if healt <= 0:
 		die()
 	else:
@@ -54,3 +55,10 @@ func take_damage(damage: int, attacker_position: Vector2) -> void:
 
 func die() -> void:
 	is_alive = false
+	animated_sprite.play("die")
+	
+	hit.pitch_scale = 0.7
+	hit.play()
+	
+	$CollisionShape2D.set_deferred("disabled", true)
+	$sight/CollisionShape2D.set_deferred("disabled", true)
