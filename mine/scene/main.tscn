@@ -1,12 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://x17akri87jvh"]
+[gd_scene load_steps=2 format=3 uid="uid://x17akri87jvh"]
 
-[ext_resource type="PackedScene" uid="uid://cpw7yotoj1tgb" path="res://scene/player.tscn" id="1_itxqv"]
-[ext_resource type="PackedScene" uid="uid://c7vckloi7ghk0" path="res://scene/slime.tscn" id="2_v0l8b"]
+[ext_resource type="PackedScene" uid="uid://cppcdj3tan2di" path="res://scene/levels/base_level.tscn" id="1_wp4xf"]
 
 [node name="main" type="Node2D"]
 
-[node name="player" parent="." instance=ExtResource("1_itxqv")]
-position = Vector2(48, 102)
-
-[node name="slime" parent="." instance=ExtResource("2_v0l8b")]
-position = Vector2(259, 99)
+[node name="levelroot" parent="." instance=ExtResource("1_wp4xf")]

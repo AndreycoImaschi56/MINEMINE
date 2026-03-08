@@ -432,5 +432,11 @@ metadata/_edit_group_ = true
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_fvtld")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 688
+limit_bottom = 464
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
