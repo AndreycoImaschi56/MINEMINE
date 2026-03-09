@@ -1,5 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://ufl44a38e7vv"]
+[gd_scene load_steps=3 format=3 uid="uid://ufl44a38e7vv"]
 
 [ext_resource type="PackedScene" uid="uid://cppcdj3tan2di" path="res://scene/levels/base_level.tscn" id="1_w3nd6"]
+[ext_resource type="PackedScene" uid="uid://c7vckloi7ghk0" path="res://scene/slime.tscn" id="2_1eggx"]
 
 [node name="levelroot" instance=ExtResource("1_w3nd6")]
+
+[node name="slime2" parent="slime" index="0" instance=ExtResource("2_1eggx")]
+position = Vector2(224, 42)
+
+[node name="slime" parent="slime" index="1" instance=ExtResource("2_1eggx")]
+position = Vector2(398, 137)
+
+[node name="slime3" parent="slime" index="2" instance=ExtResource("2_1eggx")]
+position = Vector2(578, 277)
+
+[node name="slime4" parent="slime" index="3" instance=ExtResource("2_1eggx")]
+position = Vector2(120, 282)
+
+[node name="slime5" parent="slime" index="4" instance=ExtResource("2_1eggx")]
+position = Vector2(287, 376)
+
+[node name="uscita" parent="." index="4"]
+position = Vector2(376, 490)
+
+[node name="CollisionShape2D" parent="uscita" index="0"]
+position = Vector2(0, -1.75)
