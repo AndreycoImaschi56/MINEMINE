@@ -6,11 +6,14 @@ const KNOKBACK_FORCE: int = 50
 
 var healt: int = 100
 var target = null
+var strenght: int = 10
 var is_alive: bool = true
+var target_in_range: bool = false
 
 @onready var hit: AudioStreamPlayer2D = $hit
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var healthbar: Node2D = $Healthbar
+@onready var attack_timer: Timer = $AttackTimer
 
 
 
@@ -62,3 +65,19 @@ func die() -> void:
 	
 	$CollisionShape2D.set_deferred("disabled", true)
 	$sight/CollisionShape2D.set_deferred("disabled", true)
+
+
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.name == "player":
+		target_in_range = true
+		body.take_damage(strenght)
+		attack_timer.start()
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	if body.name == "player":
+		target_in_range = false
+		attack_timer.stop()
+
+func _on_attack_timer_timeout() -> void:
+	if target and target_in_range:
+		target.take_damage(strenght)

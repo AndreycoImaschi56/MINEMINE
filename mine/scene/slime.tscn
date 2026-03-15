@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7vckloi7ghk0"]
+[gd_scene load_steps=29 format=3 uid="uid://c7vckloi7ghk0"]
 
 [ext_resource type="Script" uid="uid://g786hsgkpuiy" path="res://script/slime.gd" id="1_08lxr"]
 [ext_resource type="Texture2D" uid="uid://tyswwv476cgc" path="res://assets/images/enemies/Slime_Green.png" id="1_bwbrm"]
@@ -169,6 +169,9 @@ size = Vector2(20, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bwbrm"]
 radius = 90.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wkhhu"]
+size = Vector2(22, 18)
+
 [node name="slime" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 128
@@ -193,5 +196,15 @@ stream = ExtResource("3_p3a6y")
 [node name="Healthbar" parent="." instance=ExtResource("4_wkhhu")]
 position = Vector2(-9, -12)
 
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_wkhhu")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="sight" to="." method="_on_sight_body_entered"]
 [connection signal="body_exited" from="sight" to="." method="_on_sight_body_exited"]
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

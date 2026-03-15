@@ -1,8 +1,9 @@
-[gd_scene load_steps=56 format=3 uid="uid://cpw7yotoj1tgb"]
+[gd_scene load_steps=61 format=3 uid="uid://cpw7yotoj1tgb"]
 
 [ext_resource type="Script" uid="uid://dev7t4xxngt82" path="res://script/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://dsl8q80fqigyb" path="res://assets/images/player/Player.png" id="1_xo3ru"]
 [ext_resource type="AudioStream" uid="uid://dafinsemqxid" path="res://assets/audio/universfield-swoosh-015-383769.mp3" id="3_fvtld"]
+[ext_resource type="AudioStream" uid="uid://dmob5lmstwi6q" path="res://assets/audio/universfield-punch-03-352040.mp3" id="4_ct4mp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wapc"]
 atlas = ExtResource("1_xo3ru")
@@ -51,6 +52,22 @@ region = Rect2(64, 256, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_slqdk"]
 atlas = ExtResource("1_xo3ru")
 region = Rect2(96, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yrng"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(0, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acav1"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(32, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36u8p"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(64, 288, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtno0"]
+atlas = ExtResource("1_xo3ru")
+region = Rect2(96, 288, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hjaqi"]
 atlas = ExtResource("1_xo3ru")
@@ -251,6 +268,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1yrng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acav1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36u8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtno0")
+}],
+"loop": false,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_hjaqi")
 }, {
 "duration": 1.0,
@@ -389,15 +423,6 @@ animations = [{
 }]
 
 [sub_resource type="GDScript" id="GDScript_fvtld"]
-script/source = "extends AnimatedSprite2D
-
-const SPEED = 100
-
-
-func _physics_process(delta: float) -> void:
-	var direction := Input.get_vector(\"left\", \"right\", \"up\", \"down\")
-
-"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ct4mp"]
 size = Vector2(12, 6)
@@ -411,7 +436,7 @@ script = ExtResource("1_hjaqi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g2vtq")
-animation = &"attack_down"
+animation = &"die"
 flip_h = true
 script = SubResource("GDScript_fvtld")
 
@@ -437,6 +462,13 @@ limit_left = 0
 limit_top = 0
 limit_right = 688
 limit_bottom = 464
+
+[node name="takedamage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ct4mp")
+
+[node name="damagecooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

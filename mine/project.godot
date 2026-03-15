@@ -15,6 +15,10 @@ run/main_scene="uid://x17akri87jvh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://addons/icon.svg"
 
+[autoload]
+
+player_stats="*res://script/player_stats.gd"
+
 [display]
 
 window/size/viewport_width=320
