@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 100
 
+signal health_changed(new_healt: int)
 signal died
 
 var last_direction: Vector2 = Vector2.RIGHT
@@ -114,7 +115,7 @@ func take_damage(amount: int) -> void:
 		takedamagesound.play()
 		health -= amount
 		player_stats.health = health
-		print(health)
+		emit_signal("health_changed", health)
 		if health <= 0:
 			die()
 		damagecooldown.start()

@@ -1,9 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://fytg351qdx6k"]
+[gd_scene load_steps=3 format=3 uid="uid://fytg351qdx6k"]
 
 [ext_resource type="Script" uid="uid://bf2ex78tssj6s" path="res://script/canvas_layer.gd" id="1_xp8f4"]
+[ext_resource type="Texture2D" uid="uid://dsiithcb12ore" path="res://assets/images/enemies/Heart.png" id="2_dp5bb"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_xp8f4")
+
+[node name="hearts" type="HBoxContainer" parent="."]
+offset_right = 96.0
+offset_bottom = 16.0
+
+[node name="heart0" type="TextureRect" parent="hearts"]
+layout_mode = 2
+texture = ExtResource("2_dp5bb")
+stretch_mode = 2
+
+[node name="heart1" type="TextureRect" parent="hearts"]
+layout_mode = 2
+texture = ExtResource("2_dp5bb")
+stretch_mode = 2
+
+[node name="heart2" type="TextureRect" parent="hearts"]
+layout_mode = 2
+texture = ExtResource("2_dp5bb")
+stretch_mode = 2
+
+[node name="heart3" type="TextureRect" parent="hearts"]
+layout_mode = 2
+texture = ExtResource("2_dp5bb")
+stretch_mode = 2
+
+[node name="heart4" type="TextureRect" parent="hearts"]
+layout_mode = 2
+texture = ExtResource("2_dp5bb")
+stretch_mode = 2
 
 [node name="FadeOverlay" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)
