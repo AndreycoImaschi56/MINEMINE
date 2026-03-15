@@ -361,3 +361,5 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="uscita"]
 position = Vector2(0, 19.5)
 shape = SubResource("RectangleShape2D_mofh3")
+
+[node name="items" type="Node2D" parent="."]

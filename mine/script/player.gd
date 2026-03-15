@@ -108,6 +108,13 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		body.take_damage(strenght, position)
 		
 
+func heal(amount: int) -> void:
+	health += amount
+	if health >= max_health:
+		health = max_health
+	player_stats.health = health
+	emit_signal("health_changed", health)
+
 func take_damage(amount: int) -> void:
 	if alive:
 		if damagecooldown.time_left > 0:
